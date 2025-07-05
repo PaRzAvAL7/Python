@@ -1,0 +1,51 @@
+# Albin Paulson
+#July 26,2023
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.action_chains import ActionChains
+
+driver = webdriver.Chrome()
+driver.get('https://magento.softwaretestingboard.com/')
+
+# Step 1: Click on Women -> Tops -> Hoodies & Sweatshirts
+women_menu = driver.find_element(By.XPATH, "YOUR_XPATH_FOR_WOMEN_MENU")
+tops_submenu = driver.find_element(By.XPATH, "YOUR_XPATH_FOR_TOPS_SUBMENU")
+hoodies_option = driver.find_element(By.XPATH, "YOUR_XPATH_FOR_HOODIES_OPTION")
+
+actions = ActionChains(driver)
+actions.move_to_element(women_menu).move_to_element(tops_submenu).move_to_element(hoodies_option).click().perform()
+
+# Step 2: Select the appropriate Style, Size, Price Range, Color, and Material
+style_option = driver.find_element(By.XPATH, "YOUR_XPATH_FOR_STYLE_OPTION")
+style_option.click()
+
+size_option = driver.find_element(By.XPATH, "YOUR_XPATH_FOR_SIZE_OPTION")
+size_option.click()
+
+price_option = driver.find_element(By.XPATH, "YOUR_XPATH_FOR_PRICE_OPTION")
+price_option.click()
+
+color_option = driver.find_element(By.XPATH, "YOUR_XPATH_FOR_COLOR_OPTION")
+color_option.click()
+
+material_option = driver.find_element(By.XPATH, "YOUR_XPATH_FOR_MATERIAL_OPTION")
+material_option.click()
+
+# Step 3: Select any single dress (if there are multiple depending upon your selection) and click on Add to cart
+dress_item = driver.find_element(By.XPATH, "YOUR_XPATH_FOR_DRESS_ITEM")
+dress_item.click()
+
+# Step 4: Click the "cart icon"
+cart_icon = driver.find_element(By.XPATH, "YOUR_XPATH_FOR_CART_ICON")
+cart_icon.click()
+
+# Step 5: Click on the "Proceed to Checkout" Button
+checkout_button = driver.find_element(By.XPATH, "YOUR_XPATH_FOR_CHECKOUT_BUTTON")
+checkout_button.click()
+
+# Step 6: Assert the "Order_summary". Your shopping cart should show the dress selected by you.
+order_summary = driver.find_element(By.XPATH, "YOUR_XPATH_FOR_ORDER_SUMMARY")
+assert "Dress Name" in order_summary.text  # Replace "Dress Name" with the name of the selected dress
+
+# Step 7: Finally close the browser
+driver.quit()
