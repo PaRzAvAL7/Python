@@ -1,0 +1,58 @@
+#Emoji translator
+
+# English words and their corresponding emojis
+english_words = ["100", "cat", "heart", "angry", "clap", "horse", "apple", "cold", "hot", "banana", "cookie",
+                 "map", "bird", "dog", "OK", "brain", "egg", "sad", "bus", "fish", "sleep", "car", "fox", "tree",
+                 "carrot", "happy", "zombie"]
+emoji_list = ["💯", "🐈", "❤", "😠", "👏", "🐎", "🍎", "🥶", "🥵", "🍌", "🍪", "🗺", "🐦", "🐕", "👌", "🧠", "🥚", "😢",
+              "🚌", "🐟", "🛌", "🚗", "🦊", "🌲", "🥕", "😀", "🧟"]
+
+# Encode function 
+def encode(message):
+    encoded_string = ""
+    words = message.split()
+    for word in words:
+        match_found = False
+        for i in range(len(english_words)):
+            if word.lower() == english_words[i].lower():
+                encoded_string += emoji_list[i] + " "
+                match_found = True
+                break
+        if not match_found:
+            encoded_string += word + " "
+    return encoded_string.strip()
+
+# Decode function
+def decode(message):
+    decoded_string = ""
+    emojis = message.split()
+    for emoji in emojis:
+        match_found = False
+        for i in range(len(emoji_list)):
+            if emoji == emoji_list[i]:
+                decoded_string += english_words[i] + " "
+                match_found = True
+                break
+        if not match_found:
+            decoded_string += emoji + " "
+    return decoded_string.strip()
+
+# Main function
+def main():
+    while True:
+        print("Enter '1' to encode, '2' to decode, or '3' to exit:")
+        choice = input().strip()
+        if choice == '1':
+            text = input("Enter text to encode: ")
+            print("Encoded text:", encode(text))
+        elif choice == '2':
+            text = input("Enter text to decode: ")
+            print("Decoded text:", decode(text))
+        elif choice == '3':
+            print("Exiting the program...")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
